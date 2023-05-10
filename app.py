@@ -14,7 +14,9 @@ def scrape_text():
     soup = BeautifulSoup(response.content, 'html.parser')
     text = soup.get_text()
 
-    return jsonify({"text": text})
+    cleaned_text = re.sub(r'\n+', '. ', text)
+
+    return jsonify({"text": cleaned_text})
 
 if __name__ == '__main__':
     app.run()
